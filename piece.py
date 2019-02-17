@@ -2,27 +2,6 @@ from copy import deepcopy
 from error import ColorError, InvalidMove, InvalidPiece
 
 
-def abbr2piece(abbreviation):
-    abbr = abbreviation.lower()
-    color = "w" if abbreviation.isupper() else "b"
-    if abbr == "-":
-        return None
-    elif abbr == "p":
-        return Pawn(color)
-    elif abbr == "n":
-        return Knight(color)
-    elif abbr == "b":
-        return Bishop(color)
-    elif abbr == "r":
-        return Rook(color)
-    elif abbr == "q":
-        return Queen(color)
-    elif abbr == "k":
-        return King(color)
-    else:
-        raise InvalidPiece(f"Unknown piece: {abbreviation}")
-
-
 class Piece(object):
     """ base class of chess pieces """
 
@@ -292,10 +271,3 @@ class King(Piece):
         self.position = dest
 
 
-def main():
-    piece = abbr2piece("P")
-    print(piece == "P")
-
-
-if __name__ == '__main__':
-    main()
