@@ -1,5 +1,7 @@
 from error import ColorError, InvalidFEN, InvalidNotation
-from piece import abbr2piece
+from flyweight import PieceCreator
+
+abbr2piece = PieceCreator()
 
 
 class Board(object):
