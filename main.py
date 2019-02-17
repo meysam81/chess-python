@@ -5,8 +5,7 @@ from singleton import Singleton
 
 
 def main():
-    s = Singleton()
-    chess = s.chess
+    chess = Singleton().chess
 
     root = tk.Tk()
     root.title("Chess")

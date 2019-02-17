@@ -4,15 +4,12 @@ from chess import Chess
 class Singleton:
     _chess = None
 
-    def __init__(self):
-        self.chess = Chess
-
     @property
     def chess(self):
-        print(type(self._chess))
-        return self._chess
+        if Singleton._chess is None:
+            Singleton._chess = Chess()
+        return Singleton._chess
 
     @chess.setter
-    def chess(self, cls):
-        if self._chess is None:
-            self._chess = cls()
+    def chess(self, item):
+        raise Exception("You cannot re-assign a singleton object!")
