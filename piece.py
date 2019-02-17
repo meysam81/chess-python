@@ -1,5 +1,5 @@
 from copy import deepcopy
-from error import ColorError, InvalidMove, InvalidPiece
+from error import ColorError, InvalidMove
 
 
 class Piece(object):
