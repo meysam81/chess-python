@@ -1,6 +1,5 @@
 import tkinter as tk
 from gui import GUI
-from chess import Chess
 from singleton import Singleton
 
 
