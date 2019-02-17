@@ -1,6 +1,8 @@
-from piece import Pawn, Rook, Knight, Bishop, King, Queen
+from factory import PieceFactory
 from error import InvalidPiece
 
+# alias for convenience
+factory = PieceFactory.factory
 
 class Flyweight(object):
     def __init__(self, cls):
@@ -26,19 +28,19 @@ class PieceCreator:
     black_bishop_c = 0
 
     def __init__(self):
-        self.white_pawns = [Pawn('w') for _ in range(8)]
-        self.white_rooks = [Rook('w') for _ in range(2)]
-        self.white_knights = [Knight('w') for _ in range(2)]
-        self.white_bishops = [Bishop('w') for _ in range(2)]
-        self.white_queen = Queen('w')
-        self.white_king = King('w')
+        self.white_pawns = [factory('pawn', 'white') for _ in range(8)]
+        self.white_rooks = [factory('rook', 'white') for _ in range(2)]
+        self.white_knights = [factory('knight', 'white') for _ in range(2)]
+        self.white_bishops = [factory('bishop', 'white') for _ in range(2)]
+        self.white_queen = factory('queen', 'white')
+        self.white_king = factory('king', 'white')
 
-        self.black_pawns = [Pawn('b') for _ in range(8)]
-        self.black_rooks = [Rook('b') for _ in range(2)]
-        self.black_knights = [Knight('b') for _ in range(2)]
-        self.black_bishops = [Bishop('b') for _ in range(2)]
-        self.black_queen = Queen('b')
-        self.black_king = King('b')
+        self.black_pawns = [factory('pawn', 'black') for _ in range(8)]
+        self.black_rooks = [factory('rook', 'black') for _ in range(2)]
+        self.black_knights = [factory('knight', 'black') for _ in range(2)]
+        self.black_bishops = [factory('bishop', 'black') for _ in range(2)]
+        self.black_queen = factory('queen', 'black')
+        self.black_king = factory('king', 'black')
 
     def __call__(self, item, *args, **kwargs):
         if item == "-":
