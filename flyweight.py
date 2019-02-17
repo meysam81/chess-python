@@ -4,6 +4,7 @@ from error import InvalidPiece
 # alias for convenience
 factory = PieceFactory.factory
 
+
 class Flyweight(object):
     def __init__(self, cls):
         self._cls = cls
