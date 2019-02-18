@@ -89,7 +89,7 @@ ENV/
 .ropeproject
 
 # VSCode project settings
-.vscode/.idea/
+.vscode/
 
 # Pycharm directory
 .idea/
