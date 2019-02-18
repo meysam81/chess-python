@@ -55,9 +55,9 @@ class Chess(object):
             raise InvalidMove("The king is under attack")
 
         # update board
-        ## push to care-taker
+        # 1. push to care-taker
         self._care_taker.push(self.create_memento())
-        ## update history (what for?)
+        # 2. update history (what for?)
         self.history.append(deepcopy(self.board))
         piece.move_to(dest)
 
@@ -100,6 +100,7 @@ class Chess(object):
     def undo(self):
         last_memento = self._care_taker.pop()
         self.set_memento(last_memento)
+        self.history.pop()
 
     def set_memento(self, memento):
         previous_state = pickle.loads(memento)
