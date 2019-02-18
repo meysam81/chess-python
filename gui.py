@@ -54,6 +54,9 @@ class GUI(tk.Frame):
         self.button_reset = tk.Button(self, text="Restart", fg="black", command=self.restart)
         self.button_reset.pack(side=tk.RIGHT, in_=self.statusbar)
 
+        self.button_undo = tk.Button(self, text="Undo", fg="black", command=self.undo)
+        self.button_undo.pack(side=tk.RIGHT, in_=self.statusbar)
+
         self.label_status = tk.Label(self.statusbar, text="White's turn", fg="black")
         self.label_status.pack(side=tk.LEFT, expand=0, in_=self.statusbar)
 
@@ -199,3 +202,13 @@ class GUI(tk.Frame):
         ]
         self.label_status["text"] = "White's turn"
         self.refresh()
+
+    def undo(self):
+        try:
+            self.chess.undo()
+            self.highlighted = [
+                [False for _ in range(self.columns)] for _ in range(self.rows)
+            ]
+            self.refresh()
+        except InvalidMove as err:
+            self.label_status["text"] = err.__class__.__name__
