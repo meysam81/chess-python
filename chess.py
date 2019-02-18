@@ -1,6 +1,7 @@
 from copy import deepcopy
 import pickle
 
+from memento import Memento, CareTaker
 from board import Board
 from error import Check, InvalidMove, InvalidPiece, NotYourTurn
 
@@ -17,7 +18,7 @@ class Chess(object):
             fen = self.initial_fen
         self.board = Board(fen)
         self.history = []
-        self._care_taker = self.CareTaker()
+        self._care_taker = CareTaker()
 
     def restart(self):
         self.board = Board(self.initial_fen)
@@ -83,29 +84,15 @@ class Chess(object):
         if self.incheck(self.board.playing):
             raise Check()
 
-    class CareTaker:
-        _mementos = list()
-
-        def push(self, memento):
-            if len(self._mementos) == 2:
-                self._mementos.pop(0)
-            self._mementos.append(memento)
-
-        def pop(self):
-            try:
-                return self._mementos.pop()
-            except IndexError:
-                raise InvalidMove
-
     def undo(self):
         last_memento = self._care_taker.pop()
         self.set_memento(last_memento)
-        self.history.pop()
 
     def set_memento(self, memento):
-        previous_state = pickle.loads(memento)
+        previous_state = pickle.loads(memento).get_state()
         vars(self).clear()
         vars(self).update(previous_state)
 
     def create_memento(self):
-        return pickle.dumps(vars(self))
+        memento = Memento(vars(self))
+        return pickle.dumps(memento)
